@@ -15,6 +15,9 @@ server.use(mainRoutes)
 
 //criando a rota da PUBLIC
 server.use(express.static(path.join(__dirname,'../public')))
+
+//ULTILIZANDO METODO POST 
+    server.use(express.urlencoded({extended:true}))
 //criando a rota para views
 server.set('views',path.join(__dirname,'views'))
 

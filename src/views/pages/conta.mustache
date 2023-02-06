@@ -1,0 +1,14 @@
+{{>partials/header}}
+
+<h2>Digite o seu ano de nascimento?</h2>
+
+<form method="post" action="/conta">
+        
+    <h2>Qual ano você nasceu?</h2>
+    <input type="number" name="anoNascimento">
+    <input type="submit" value="Calcular">
+</form>
+
+{{#idade}}
+   essa é a sua idade {{idade}} 
+{{/idade}}

@@ -1,5 +1,6 @@
-import {Router, Request, Response} from 'express'
+import {Router, Request, Response, response} from 'express'
 import { request } from 'http'
+import internal from 'stream'
 
 const router = Router()
 
@@ -9,7 +10,7 @@ router.get('/',(req: Request,res: Response) =>{
         //nome:'Fulaninho',
         //idade:10
     //}
-    res.render ('home',{
+    res.render ('pages/home',{
         nome: "fulaninho",
         showWelcome: false 
     })
@@ -22,7 +23,7 @@ router.get('/',(req: Request,res: Response) =>{
 
 //Criando a rota /contato e renderizar uma pagina 
 router.get('/Contato',(req: Request,res: Response) =>{
-    res.render('contatos')
+    res.render('pages/contatos')
 })
 
 //Crinado a rota chamada idade e renderiza uma pagina 
@@ -35,15 +36,16 @@ router.get('/idade',(req: Request,res: Response) =>{
         mostrarIdade = true
     } 
     
-    res.render('idade',{
+    res.render('pages/idade',{
         nome: "Ciclano",
         mostrarIdade,
         products:[
-        'mouse',
+        /*'mouse',
         'Leite em pó',
         'desodorante',
         'Lustra Imoveis',
         'Sabão em pó'
+        */
         ]
     })
 
@@ -63,5 +65,43 @@ router.get('/voo/:origem-:destino',(req,res) =>{
 
     res.send(`Procurando voos de ${origem} até ${destino}`)
 })
+
+router.get('/name',(req: Request,res:Response) =>{
+    let name: string = req.query.name as string
+    res.render('pages/name', {
+        name
+    })
+})
+
+router.get('/formulario',(req: Request,res:Response) =>{
+    let name: string = req.query.name as string 
+    let telefone: string = req.query.telefone as string
+    let idade: number = req.query.idade as unknown as number
+    let endereco: string = req.query.endereco as string
+    res.render('pages/formulario', {
+        name,
+        telefone,
+        idade,
+        endereco
+    })
+})
+
+router.get('/conta', (req:Request,res:Response) =>{
+    res.render("pages/conta")
+})
+
+router.post('/conta', (req: Request,res:Response) =>{
+
+    let anoNascimento: number = parseInt(req.body.anoNascimento as string)
+    let idade = 2023 - anoNascimento 
+    
+    res.render("pages/conta",{
+       idade  
+    })
+
+})
+
+
+
 //exportando o arquivo index 
 export default router

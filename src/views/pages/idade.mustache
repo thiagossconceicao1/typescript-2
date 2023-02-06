@@ -1,0 +1,25 @@
+
+    {{>partials/header}}
+
+    <link rel="stylesheet" href="/css/idade.css">
+
+    <h1>exercicio de idade</h1>
+    {{#mostrarIdade}}
+    olá {{nome}} você é maior de idade 
+    {{/mostrarIdade}}
+
+    {{#products}}
+
+    <li>{{.}}</li>
+
+    {{/products}}
+
+    
+    
+    {{^products}}
+    <p>Não temos produtos no momento</p>
+    {{/products}}
+
+    {{partials/footer}}
+
+
